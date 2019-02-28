@@ -41,5 +41,19 @@ function initGestures() {
 
 // init RSVP form submit listener
 function initRSVPForm() {
-  // add your code here
+  //add your code here
+  $('#rsvpForm').submit(function(e) {
+
+    //prevents default submit + reload (we only want the submit part)
+    e.preventDefault();
+    console.log("submitting form...")
+    var rsvpEmail = $('#rsvpEmail').val();
+    //send the POST request
+    $.post('addRSVP', {rsvpEmail: rsvpEmail }, postCallback);
+  });
+
+  function postCallback(res) {
+    alert ("RSVP form successfully submitted!");
+    $('#rsvpEmail').val(''); //Clear form
+  }
 }
